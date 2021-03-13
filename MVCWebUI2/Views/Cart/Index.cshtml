@@ -1,0 +1,39 @@
+﻿@model Market.MVCWebUI2.Models.CartListViewModel
+
+<h2>Sepetiniz</h2>
+
+@if (Model.Cart.CartItems.Count == 0)
+{
+    <h2 class="badge badge-danger">Sepetiniz boş</h2>
+}
+else
+{
+    <table class="table table-responsive">
+    
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ürün ismi</th>
+            <th>Açıklama</th>
+            <th>Fiyat</th>
+            <th>Stok adedi</th>
+            <th>Satış adedi</th>
+            <th></th>
+        </tr>
+        </thead>
+        @foreach (var cartItem in Model.Cart.CartItems)
+        {
+            <tbody>
+            <tr>
+                <td>@cartItem.Product.ProductId</td>
+                <td>@cartItem.Product.ProductName</td>
+                <td>@cartItem.Product.QuantityPerUnit</td>
+                <td>@cartItem.Product.UnitPrice</td>
+                <td>@cartItem.Product.UnitsInStock</td>
+                <td>@cartItem.Quantity</td>
+                <td><a class="btn btn-sm btn-danger" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-productId="@cartItem.Product.ProductId">Sepetten sil</a></td>
+            </tr>
+            </tbody>
+        }
+    </table>
+}
